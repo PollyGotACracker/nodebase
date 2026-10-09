@@ -1,0 +1,18 @@
+# --- User settings ---
+
+## Environment files
+.env*
+!.env.example
+
+# --- Personal data ---
+
+## Settings folder
+.*/
+!.claude/
+!.github/
+
+# --- Temporary files ---
+
+## Python cache files
+__pycache__/
+*.pyc
