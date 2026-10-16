@@ -33,7 +33,7 @@
       - `wiki/entities/<topic>-<subtopic>-<name>.md`
       - `wiki/concepts/<topic>-<subtopic>-<name>.md`
    3. 페이지가 있으면 끝에 아래 절을 추가하고 새 사실을 기록한다.
-      프론트매터의 `date`를 1단계의 날짜로 갱신한다.
+      프론트매터의 `date modified`를 1단계의 날짜로 갱신한다.
 
    ```markdown
    ## From [[wiki/sources/ai-harness-long-running-agents|Long-running agents]]
