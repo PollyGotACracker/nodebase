@@ -126,12 +126,17 @@ wiki/sources/ai-harness-long-running-agents.md
 ```yaml
 ---
 title: 제목
-date: YYYY-MM-DD
+date created: YYYY-MM-DD
+date modified: YYYY-MM-DD
+url:
+  - "https://example.com/original-article"
 ---
 ```
 
 - `title`: 문서 제목
-- `date`: 문서 마지막 편집 시각
+- `date created`: 문서 생성 시각
+- `date modified`: 문서 마지막 편집 시각
+- `url`(선택 항목): 웹 문서를 그대로 옮긴 경우 실제 원문 주소. 일부 참조의 경우 별도의 절에 작성한다.
 
 ### wiki
 
@@ -139,27 +144,38 @@ date: YYYY-MM-DD
 
 ```yaml
 ---
-aliases: []
 title: 제목
-date: YYYY-MM-DD
-tags: [wiki, 분류]
 description: ""
-draft: false
-related: # 선택
+aliases: []
+type: source | entity | concept | query
+tags: [wiki, 분류]
+source:
+  - "[[wiki/sources/ai-agent-permissions]]"
+related:
   - "[[wiki/concepts/ai-harness-engineering]]"
   - "[[wiki/entities/ai-harness-codex]]"
+model: "확인한 모델 ID"
+effort: "확인한 reasoning effort"
+date created: YYYY-MM-DD
+date modified: YYYY-MM-DD
+draft: true
 ---
 ```
 
-- `aliases`:문서 제목 외의 별칭
 - `title`: 문서 제목
-- `date`: 문서 마지막 편집 시각
-- `tags`: 문서 분류 태그 목록
 - `description`: 문서의 짧은 설명
-- `draft`: 초안 여부
+- `aliases`:문서 제목 외의 별칭
+- `type`: 문서의 역할
+- `tags`: 문서 분류 태그 목록
+- `source`: 문서 작성에 사용한 raw 또는 sources 문서
 - `related`(선택 항목): 관련 문서 링크 목록  
   위키링크를 따옴표로 감싸고 글머리 기호를 적용하며, 공백 2개를 사용한다.
   목적은 Obsidian의 YAML 인식이다.
+- `model`: 마지막 문서 수정에 사용된 AI model
+- `effort`: 마지막 문서 수정에 사용된 AI effort
+- `date created`: 문서 생성 시각
+- `date modified`: 문서 마지막 편집 시각
+- `draft`: 초안 여부. 공개 승인 여부와는 구별된다.
 
 ## 링크
 
