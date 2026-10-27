@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>홈 방문자 안내판</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: #28392e;
+        background: transparent;
+        font:
+          12px ui-monospace,
+          monospace;
+      }
+      section {
+        border: 1px solid #53624e;
+        background: #fffcf4;
+      }
+      header {
+        padding: 10px;
+        background: #28392e;
+        color: #fffcf4;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      h1 {
+        font-size: 11px;
+        margin: 14px 10px 6px;
+      }
+      ul {
+        padding: 0 10px;
+        margin: 0;
+        list-style: none;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 0;
+        border-bottom: 1px dotted #bbc1b4;
+      }
+      #status {
+        margin: 0;
+        padding: 10px;
+        line-height: 1.5;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: #ddd;
+        }
+        section {
+          background: #222;
+          border-color: #777;
+        }
+        header {
+          background: #393639;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section aria-label="홈 방문자 안내판">
+      <header><span>NODEBASE</span><time id="clock">--:--:--</time></header>
+      <h1>ARRIVALS · 현재 홈 방문자</h1>
+      <ul id="visitors"></ul>
+      <p id="status" role="status">CONNECTING · 연결 중…</p>
+    </section>
+    <script type="module">
+      const status = document.querySelector("#status")
+      const visitors = document.querySelector("#visitors")
+      const clock = document.querySelector("#clock")
+      const tick = () => {
+        clock.textContent = new Date().toLocaleTimeString("ko-KR", { hour12: false })
+      }
+      tick()
+      setInterval(tick, 1000)
+
+      function fail() {
+        status.textContent = "OFFLINE · 연결되지 않았습니다"
+        visitors.replaceChildren()
+      }
+
+      try {
+        const url = "https://unpkg.com/playhtml@2.15.0/dist/playhtml.es.js"
+        const { playhtml } = await import(url)
+        playhtml.init({ room: "nodebase-home", onError: fail })
+        const timeout = setTimeout(fail, 15000)
+        await playhtml.ready
+        clearTimeout(timeout)
+
+        function render() {
+          const people = [...playhtml.presence.getPresences()].filter(
+            ([, person]) => person.arrival,
+          )
+          people.sort(([, a], [, b]) => Number(b.isMe) - Number(a.isMe))
+          const rows = people.slice(0, 3).map(([id, person]) => {
+            const row = document.createElement("li")
+            const name = document.createElement("span")
+            name.textContent = person.isMe ? "YOU · 나" : `방문자 ${id.slice(0, 6)}`
+            const time = document.createElement("time")
+            time.textContent = new Date(person.arrival.at).toLocaleTimeString("ko-KR", {
+              hour12: false,
+            })
+            row.append(name, time)
+            return row
+          })
+          visitors.replaceChildren(...rows)
+          const more = people.length > 3 ? ` · +${people.length - 3}명` : ""
+          status.textContent = `LIVE · ${people.length}명 접속 중${more}`
+        }
+
+        playhtml.presence.onPresenceChange("arrival", render)
+        playhtml.presence.setMyPresence("arrival", { at: Date.now() })
+        render()
+      } catch (error) {
+        fail()
+        console.error(error)
+      }
+    </script>
+  </body>
+</html>

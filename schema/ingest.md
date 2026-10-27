@@ -1,55 +1,44 @@
-# ingest
+---
+title: Ingest 스키마
+description: "원본 자료를 Wiki에 반영하는 절차를 정의한다. 원본 자료를 바탕으로 Wiki 문서를 생성하거나 수정할 때 참고한다."
+type: schema
+created: 2026-10-09
+modified: 2026-10-25
+---
 
-이 문서는 `raw/` 파일의 위키 편입 절차이다.
+# Ingest 스키마
 
 ## 입력
 
 - `PATH`는 `raw/` 기준 파일 경로이다.
+- 원본은 읽기 대상으로 사용하고 내용과 경로를 보존한다.
+
+## 적용 기준
+
+작업 전에 공통 지침의 경로 목록에서 폴더 구조, 파일명 규칙, frontmatter 규격, Markdown 링크 규칙의 원문을 읽는다.
 
 ## 절차
 
-### 자료 확인
-
-1. 현재 날짜를 조회해 `YYYY-MM-DD` 형식으로 표기한다.
-2. `raw/PATH` 파일을 확인한다.
-3. `raw/PATH` 파일에서 아래 항목을 추출한다.
-   - 주제
-   - `entities` 대상(고유명사)
-   - `concepts` 대상
-   - 핵심 주장과 인용
-4. 핵심어와 `entities`, `concepts` 대상 이름으로 `wiki/` 폴더를 검색한다.
-
-### 페이지 작성
-
-1. `wiki/sources/<topic>-<subtopic>-<name>.md` 페이지를 작성한다.
-   `<topic>`은 대주제, `<subtopic>`은 세부 주제이다.
-   `AGENTS.md`의 `폴더`, `파일명` 이름 규칙을 적용한다.
-   - `AGENTS.md`의 프론트매터
-   - `## 요약` 절의 요약 목록
-   - `## entities` 절의 `wiki/entities/` 링크 목록
-2. 추출한 `entities`, `concepts` 대상별로 아래 절차를 수행한다.
-   1. 이름과 별칭으로 `wiki/entities/` 또는 `wiki/concepts/`를 검색한다.
-   2. 페이지가 없으면 아래 경로 중 하나에 신규 작성한다.
-      - `wiki/entities/<topic>-<subtopic>-<name>.md`
-      - `wiki/concepts/<topic>-<subtopic>-<name>.md`
-   3. 페이지가 있으면 끝에 아래 절을 추가하고 새 사실을 기록한다.
-      프론트매터의 `date modified`를 1단계의 날짜로 갱신한다.
-
-   ```markdown
-   ## From [[wiki/sources/ai-harness-long-running-agents|Long-running agents]]
-
-   - 사실
-   ```
-
-### 목차 갱신
-
-1. `wiki/INDEX.md`의 해당 절에 새 페이지를 추가한다.
-
-   ```markdown
-   - [[wiki/concepts/ai-loop-ralph-wiggum|Ralph Wiggum loop]] | 요약
-   ```
+1. 현재 날짜와 시각을 확인한다.
+2. `raw/PATH`에서 주제, 고유명사, 개념, 핵심 주장과 인용을 확인한다.
+3. `wiki/index.md`에서 관련 문서를 찾고 링크를 따라 읽는다.
+4. 핵심어와 별칭으로 `wiki/`를 검색해 기존 문서와 중복을 확인한다.
+5. `wiki/sources/`에 원본별 요약을 작성한다.
+   `type: source`, 원본을 가리키는 `sources`, 요약과 관련 문서 링크를 포함한다.
+6. 고유명사는 `wiki/entities/`, 개념은 `wiki/concepts/`에서 작성하거나 갱신한다.
+   유형은 각각 `entity`와 `concept`이며 파일명과 메타데이터는 파일명 규칙과 frontmatter 규격을 따른다.
+7. 새 사실을 관련 절에 통합하고 기존 출처를 보존한다.
+8. 추가 출처를 `sources`에 기록하고 주장별 각주를 연결한다.
+9. 작성 정보와 변경 시각은 확인한 값으로 기록한다.
+   검증 정보는 실제 검증 근거가 있는 경우에 기록한다.
+10. 상충 주장은 각각의 출처와 적용 조건을 남긴다.
+11. 수동 관리 중인 `wiki/index.md`에 문서 링크와 설명을 추가한다.
+12. `wiki/log.md`가 있으면 실제 변경을 최신 날짜 항목에 기록한다.
+13. 변경 문서의 배치와 파일명을 폴더 구조와 파일명 규칙으로 확인한다.
+    YAML, `type`, 출처, 각주와 링크 대상은 frontmatter 규격과 Markdown 링크 규칙으로 확인한다.
+14. `raw/` 원본의 내용과 경로가 작업 전과 같은지 확인한다.
 
 ## 진행 방식
 
-1. 단계별 결과를 확인한다.
-2. 파일 작성 또는 수정 전 내용을 우선 제안한다.
+1. 작성 또는 수정 전 대상과 변경 내용을 제안한다.
+2. 승인한 범위에 적용하고 검증 결과를 보고한다.

@@ -1,0 +1,15 @@
+{
+  "name": "nodebase",
+  "private": true,
+  "scripts": {
+    "generate": "cd site && pnpm install --frozen-lockfile && pnpm run quartz plugin install",
+    "sync": "git subtree pull --prefix=site https://github.com/jackyzha0/quartz.git v5 --squash && cd site && pnpm install && pnpm run quartz plugin install --from-config",
+    "dev": "cd site && pnpm run quartz build -d ../raw --serve",
+    "build": "cd site && pnpm run quartz build -d ../raw",
+    "preview": "echo site link: http://127.0.0.1:8080 && echo build path: site/public/ && python -u -m http.server 8080 --bind 127.0.0.1 --directory site/public",
+    "check": "cd site && pnpm run check",
+    "test": "cd site && pnpm test",
+    "plugins:install": "cd site && pnpm run quartz plugin install",
+    "plugins:sync": "cd site && pnpm run quartz plugin install --from-config"
+  }
+}

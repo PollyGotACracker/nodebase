@@ -1,35 +1,60 @@
-# 지식 저장소 원칙
+---
+title: 저장소 원칙
+description: "nodebase 저장소 에이전트에 적용되는 저장소 전체 지침을 정의한다. 저장소 문서를 읽거나 수정하기 전에 참고한다."
+type: instruction
+created: 2026-10-09
+modified: 2026-10-25
+---
 
-## 작업 절차
+# 저장소 원칙
 
-- 파일을 생성하기 전, 원본 내용에 저작권 침해 요소가 있는 경우 사용자에게 알린다.
+## 작업 규칙
 
-### 경로 기준
+- 이 저장소는 Obsidian, Quartz 도구를 사용한다.
+- 지침은 Google Open Knowledge Format(OKF) v0.2를 기반으로 하며 일부 규칙은 필요에 맞게 변경 또는 재구성되었다.
+- 규칙에 없는 모호한 상황은 상기한 도구와 규칙의 명세, 필요한 경우 설치된 plugin 명세를 확인 후 사용자에게 보고한다.
+- 작업 시 상황에 맞는 `rules/`, `schema/` 문서를 확인한다.
+- 문서 작업 전 원본 내용에 저작권 침해 요소가 있는 경우 사용자에게 안내한다.
 
-- `raw/`, `wiki/`, `schema/`, 위키링크는 저장소 루트를 기준으로 해석한다.  
-  이때 위키링크는 `[[...]]` 형식을 유지한다.
-- 저장소 루트를 명시한 지침 및 `.github/` 템플릿 경로는 저장소 루트를 기준으로 해석한다.
+## OKF
 
-### 처리 순서
+- OKF bundle 루트는 `wiki/` 로 둔다.
+- OKF 관련 스킬을 포함한 설치 스킬을 사용하여 작업한다.
+- OKF 버전 업데이트 시 호환성을 확인한다.
 
-1. 현재 작업에 선택된 schema의 원본 절차를 적용한다.
-2. 해당 schema의 승인·결과 보고 절차에 따라 작업을 완료한다.
+## Rules
 
-## 폴더
+다음은 저장소 운영에 필요한 상세 규칙이다.
 
-### 구성
+| 명칭               | 경로                            |
+| ------------------ | ------------------------------- |
+| 폴더 구조          | `rules/directory-structure.md`  |
+| 파일명 규칙        | `rules/file-naming-rules.md`    |
+| Frontmatter 규격   | `rules/frontmatter-standard.md` |
+| Markdown 링크 규칙 | `rules/markdown-link-rules.md`  |
+| Git 규칙           | `rules/git-rules.md`            |
 
-- `raw/`: 사용자 작성 또는 수집 자료의 원본
-- `wiki/assets/`: 위키 문서 내부에 사용되는 에셋 파일 배치
-- `wiki/entities/`: 고유명사 1개당 1페이지를 배치
-- `wiki/concepts/`: 개념·방법론·원리 1개당 1페이지를 배치
-- `wiki/sources/`: `raw/` 문서 1개당 요약 1페이지를 배치, 생성 주체는 ingest
-- `wiki/INDEX.md`: 전체 목차
-- `schema/`: ingest·query·lint 절차를 배치
+## Schema
 
-### 배치 기준
+다음은 저장소 운영 절차를 명시한 Schema이다.
 
-`entities`, `concepts`, `sources` 페이지는 파일명의 주제순 정렬이 가능하도록 배치한다.
+| 작업   | 경로               |
+| ------ | ------------------ |
+| ingest | `schema/ingest.md` |
+| query  | `schema/query.md`  |
+| lint   | `schema/lint.md`   |
+
+## 지침 적용
+
+- 문서를 생성하거나 파일 및 폴더의 이름과 위치를 바꿀 때 폴더 구조, 파일명 규칙, Markdown 링크 규칙의 원문을 읽는다.
+- raw와 wiki 문서를 생성하거나 수정할 때 frontmatter 규격의 원문을 읽는다.
+- 링크를 생성하거나 수정할 때 Markdown 링크 규칙의 원문을 읽는다.
+- 브랜치를 생성하거나 커밋할 때 Git 규칙의 원문을 읽는다.
+
+## 처리 순서
+
+1. 현재 작업에 해당하는 ingest, query, lint 절차의 원문을 읽고 적용한다.
+2. 해당 절차의 승인과 결과 보고 기준에 따라 작업을 완료한다.
 
 ## 서식: 문장 구조
 
@@ -39,13 +64,17 @@
 
 - 한국어로 쓰고, 고유 용어와 개념어는 원문을 유지한다.
 - 한국어 문장은 주어와 서술어의 호응, 조사와 어순을 확인해 뜻이 분명하게 쓴다.
-- 근거가 없는 과장된 수식어, 상투적 평가어, 당위적 강조를 제거한다.
-- 문장 안에 포함되거나 문장을 연결하는 `—`(em dash)를 제거한다.
+- 근거 없는 수식어, 상투적 평가어, 당위적 강조를 제거한다.
+- 두 문장 사이의 dash를 제거하고 마침표를 넣는다.
   단, 목록 기호, 코드, 인용 원문, 날짜, 식별자의 하이픈은 유지한다.
-- 나열은 가운뎃점 대신 두 항목이면 조사 `와`, `과`, `및`으로, 세 항목 이상이면 쉼표로 잇는다.
+- 나열은 가운뎃점 대신 2~3개 항목이면 조사 `와`, `과`, `및` 또는 쉼표로 잇는다.  
+  4개 항목 이상인 경우 목록 구조를 고려한다.
   - 읽기·쓰기 → 읽기 및 쓰기
   - 자료·실행 결과·관측 상태 → 자료, 실행 결과, 관측 상태
-- `A가 아니라 B`, `A 대신 B` 등 대비 구문은 독자가 A로 오해할 근거가 있을 때 쓴다.
+- 다음 표현은 독자가 오해할 근거가 있을 때 쓴다.
+  - `A가 아니라 B`, `A 대신 B` 등 대비 구문
+  - `...이므로 ...한다` 등 부연 설명
+- 운영 문서에서 `...하지 않는다`의 부정 표현은 제거한다.
 - 나열 항목 수는 실제 대상 수에 맞춘다.
 
 #### 부자연스러운 문장 표현 제거
@@ -120,132 +149,3 @@
 - 폴더 구조는 tree 형식으로 작성한다. e.g. `├──`, `└──`, `│`
 - 표 머리글은 굵게 표시하고, 짧은 값은 가운데, 설명은 왼쪽으로 정렬한다.
 - 이미지는 `![설명](파일명.확장자)`, 링크는 `[표시 이름](URL)` 형식으로 작성한다.
-
-## 파일명
-
-- `wiki/INDEX.md`는 관리 파일명을 유지하고 아래 페이지 명명 규칙의 적용 대상에서 제외한다.
-- 페이지 파일명은 영문 소문자·숫자·하이픈만으로 kebab-case로 구성한다.
-- 대주제는 파일명의 첫 단어이며 파일명에는 대상을 구별하는 핵심 단어만 포함한다.
-  같은 세부 주제의 페이지는 대주제의 이름순 정렬에서 함께 배치한다.
-
-```text
-wiki/entities/ai-harness-codex.md
-wiki/entities/ai-loop-claude-agent-sdk.md
-wiki/concepts/ai-harness-engineering.md
-wiki/concepts/ai-loop-ralph-wiggum.md
-wiki/concepts/ai-prompt-caching.md
-wiki/sources/ai-harness-long-running-agents.md
-```
-
-## 프론트매터
-
-### raw
-
-```yaml
----
-title: 제목
-date created: YYYY-MM-DD
-date modified: YYYY-MM-DD
-url:
-  - "https://example.com/original-article"
----
-```
-
-- `title`: 문서 제목
-- `date created`: 문서 생성 시각
-- `date modified`: 문서 마지막 편집 시각
-- `url`(선택 항목): 웹 문서를 그대로 옮긴 경우 실제 원문 주소. 일부 참조의 경우 별도의 절에 작성한다.
-
-### wiki
-
-`wiki/INDEX.md`를 제외한 모든 위키 페이지에는 아래 프론트매터를 포함한다.
-
-```yaml
----
-title: 제목
-description: ""
-aliases: []
-type: source | entity | concept | query
-tags: [wiki, 분류]
-source:
-  - "[[wiki/sources/ai-agent-permissions]]"
-related:
-  - "[[wiki/concepts/ai-harness-engineering]]"
-  - "[[wiki/entities/ai-harness-codex]]"
-model: "확인한 모델 ID"
-effort: "확인한 reasoning effort"
-date created: YYYY-MM-DD
-date modified: YYYY-MM-DD
-draft: true
----
-```
-
-- `title`: 문서 제목
-- `description`: 문서의 짧은 설명
-- `aliases`:문서 제목 외의 별칭
-- `type`: 문서의 역할
-- `tags`: 문서 분류 태그 목록
-- `source`: 문서 작성에 사용한 raw 또는 sources 문서
-- `related`(선택 항목): 관련 문서 링크 목록  
-  위키링크를 따옴표로 감싸고 글머리 기호를 적용하며, 공백 2개를 사용한다.
-  목적은 Obsidian의 YAML 인식이다.
-- `model`: 마지막 문서 수정에 사용된 AI model
-- `effort`: 마지막 문서 수정에 사용된 AI effort
-- `date created`: 문서 생성 시각
-- `date modified`: 문서 마지막 편집 시각
-- `draft`: 초안 여부. 공개 승인 여부와는 구별된다.
-
-## 링크
-
-### 기본 형식
-
-- 위키링크는 항상 전체 경로로 작성하고 별칭은 필요한 경우 첨부한다.
-
-```markdown
-[[wiki/concepts/ai-harness-engineering|Harness engineering]]
-[[wiki/concepts/ai-loop-ralph-wiggum|Ralph Wiggum loop]]
-[[wiki/sources/ai-harness-long-running-agents|Long-running agents]]
-```
-
-### 외부 링크
-
-- 외부 URL은 `[표시 이름](URL)` 형식의 마크다운 링크로 작성한다.
-- 표시 이름은 서비스명 또는 `소유자/저장소`이다.
-- 코드 블록 안의 원문 URL은 원문 보존을 위해 변환에서 제외한다.
-
-```markdown
-- [TypeSafe](https://typesafe.ai/)
-- [PollyGotACracker/nestlab](https://github.com/PollyGotACracker/nestlab)
-```
-
-### 표 안 링크
-
-- 표 안 링크는 별칭 구분자 `|`를 백슬래시 하나로 이스케이프해 한 셀로 표시한다.
-
-```markdown
-| [[wiki/concepts/ai-prompt-caching\|Prompt caching]] | 반복되는 프롬프트 앞부분을 캐시한다 |
-```
-
-## Branch
-
-- 기본 브랜치는 `master`이다.
-- 브랜치 생성 규칙은 `<타입>/이슈번호`이다.
-
-## Commit
-
-- `.github/`의 템플릿 파일을 참고한다.
-- 커밋 단위는 승인된 변경 세트이다.
-- 메시지 형식은 `<타입>: <제목>`이다.
-- 허용 타입은 `feat`, `fix`, `chore`, `docs` 이다.
-- 제목 언어는 한국어이다.
-- 제목 길이는 40자 이내이다.
-- 본문 규칙은 아래 형식을 따른다.
-
-```text
-<타입>: <제목> (제목은 40자 이내)
-
-<본문> (한 줄 띄우고 작성. 72자 이내로 줄 바꿈)
-
-Resolves: #<이슈번호>(생략 가능)
-See also: #<이슈번호>(생략 가능)
-```
