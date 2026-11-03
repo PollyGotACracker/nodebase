@@ -3,7 +3,7 @@ title: Git 규칙
 description: "브랜치 이름, 커밋 범위, 커밋 메시지 작성 규칙을 정의한다. 브랜치나 커밋을 생성하기 전에 참고한다."
 type: instruction
 created: 2026-10-25
-modified: 2026-10-25
+modified: 2026-11-03
 ---
 
 # Git 규칙
@@ -28,7 +28,7 @@ modified: 2026-10-25
 ```text
 <type>: <title> (제목은 40자 이내)
 
-<description> (한 줄 띄우고 작성. 72자 이내로 줄 바꿈)
+<description> (한 줄 띄우고 작성. 목록 형식 명사구. 72자 이내로 줄 바꿈)
 
 Resolves: #<이슈번호>(생략 가능)
 See also: #<이슈번호>(생략 가능)
