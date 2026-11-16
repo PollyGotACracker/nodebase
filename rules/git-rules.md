@@ -12,16 +12,13 @@ modified: 2026-11-03
 
 - 기본 브랜치는 `master`이다.
 - 브랜치 생성 규칙은 `<type>/<issue-number>`이다.
-- `type`은 `.github/`의 템플릿 파일을 확인한다.
-  - 'custom' 템플릿은 정의되지 않은 추가적인 `type`을 위한 것이다.
-- `issue-number`는 작업 중 생성했거나, open 상태의 관련 이슈 번호이다.
+  - `type`은 .github/ 템플릿으로 확인한다.
+    - 'custom' 템플릿은 정의되지 않은 추가적인 `type`을 위한 것이다.
+  - `issue-number`는 작업 중 생성했거나, open 상태의 관련 이슈 번호이다.
 
 ## Commit
 
 - 커맨드는 Git Bash 기준이며 문서에는 설명과 함께 코드 블록으로 쓴다.
-- 기본 브랜치는 `master`, 새 브랜치는 `<type>/<issue-number>`이다.  
-  브랜치의 `type`은 .github/ 템플릿으로 확인하고 custom은 추가 type에 쓴다.  
-  브랜치의 `issue-number`는 작업 중 생성하거나 관련된 open 이슈 번호이다.
 - `type`의 허용 값은 `feat`, `fix`, `chore`, `docs` 이다.
 - `title` 언어는 한국어이며, 길이는 40자 이내이다.
 - 커밋 범위는 직전 커밋 기준 변경분이다. 변경분의 작업 목적이 섞여있다면 커밋을 나누는 것을 고려한다.  

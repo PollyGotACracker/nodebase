@@ -10,10 +10,10 @@ modified: 2026-11-04
 
 ## 작업 규칙
 
+- 매 턴마다 `rules/`, `schema/` 경로에서 현재 작업에 관련된 상세 규칙 및 운영 절차를 참고한다.
 - 이 저장소는 Obsidian, Quartz 도구를 사용한다.
 - 지침은 Google Open Knowledge Format(OKF) v0.2를 기반으로 하며 일부 규칙은 필요에 맞게 변경 또는 재구성되었다.
 - 규칙에 없는 모호한 상황은 상기한 도구와 규칙의 명세, 필요한 경우 설치된 plugin 명세를 확인 후 사용자에게 보고한다.
-- 작업 시 상황에 맞는 `rules/`, `schema/` 문서를 확인한다.
 - 문서 작업 전 원본 내용에 저작권 침해 요소가 있는 경우 사용자에게 안내한다.
 
 ## OKF
@@ -26,7 +26,7 @@ modified: 2026-11-04
 
 다음은 저장소 운영에 필요한 상세 규칙이다.
 
-| 명칭               | 경로                            |
+| **규칙명**         | **경로**                        |
 | ------------------ | ------------------------------- |
 | 폴더 구조          | `rules/directory-structure.md`  |
 | 파일명 규칙        | `rules/file-naming-rules.md`    |
@@ -38,11 +38,11 @@ modified: 2026-11-04
 
 다음은 저장소 운영 절차를 명시한 Schema이다.
 
-| 작업   | 경로               |
-| ------ | ------------------ |
-| ingest | `schema/ingest.md` |
-| query  | `schema/query.md`  |
-| lint   | `schema/lint.md`   |
+| **작업** | **경로**           |
+| -------- | ------------------ |
+| ingest   | `schema/ingest.md` |
+| query    | `schema/query.md`  |
+| lint     | `schema/lint.md`   |
 
 ## 지침 적용
 
