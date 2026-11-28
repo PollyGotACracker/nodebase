@@ -24,7 +24,7 @@ HomePresence.css = `
 }
 .home-presence>.home-presence-iframe {
   width: 100%;
-  min-width: 270px;
+  min-width: 254px;
   height: 240px;
   margin: .5em 0;
   border: 0;
