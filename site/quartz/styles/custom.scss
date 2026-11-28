@@ -1,3 +1,49 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// Fix the container scroll area
+html {
+  width: 100%;
+  scrollbar-gutter: stable;
+}
+
+// Fix explorer menu flickering on mobile
+.explorer .explorer-content {
+  @media all and ($mobile) {
+    transition: none !important;
+  }
+}
+
+// Fix sidebar widget wrapping
+.page > #quartz-body .sidebar.right {
+  @media all and not ($desktop) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  }
+}
+
+// Style sidebar scrollbars
+.sidebar {
+  &,
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--lightgray) transparent;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--lightgray);
+      border-radius: 4px;
+
+      &:hover {
+        background: var(--gray);
+      }
+    }
+  }
+}
